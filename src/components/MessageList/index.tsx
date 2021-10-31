@@ -1,50 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
 import logoImg from '../../assets/logo.svg';
+import { api } from '../../services/api';
+
+type Message = {
+  id: string;
+  text: string;
+  user: {
+    name: string;
+    avatar_url: string;
+  }
+}
 
 const MessageList: React.FC = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    api.get<Message[]>('/messages/last3').then((response) => {
+      setMessages(response.data);
+    });
+  }, []);
+
   return (
     <div className={styles.messageListWrapper}>
       <img src={logoImg} alt="Logo DoWhile 2021" />
 
       <ul className={styles.messageList}>
-        <li className={styles.message}>
-          <p className={styles.messageContent}>
-            An example of a message
-          </p>
-          <div className={styles.messageUser}>
-            <div className={styles.userImage}>
-              <img src="https://github.com/ivanseibel.png" alt="Ivan Seibel" />
+        {messages.map(message => (
+          <li className={styles.message} key={message.id} >
+            <p className={styles.messageContent}>
+              {message.text}
+            </p>
+            <div className={styles.messageUser}>
+              <div className={styles.userImage}>
+                <img src={message.user.avatar_url} alt={message.user.name} />
+              </div>
+              <span>{message.user.name}</span>
             </div>
-            <span>Ivan Seibel</span>
-          </div>
-        </li>
-        <li className={styles.message}>
-          <p className={styles.messageContent}>
-            An example of a message
-          </p>
-          <div className={styles.messageUser}>
-            <div className={styles.userImage}>
-              <img src="https://github.com/ivanseibel.png" alt="Ivan Seibel" />
-            </div>
-            <span>Ivan Seibel</span>
-          </div>
-        </li>
-        <li className={styles.message}>
-          <p className={styles.messageContent}>
-            An example of a message
-          </p>
-          <div className={styles.messageUser}>
-            <div className={styles.userImage}>
-              <img src="https://github.com/ivanseibel.png" alt="Ivan Seibel" />
-            </div>
-            <span>Ivan Seibel</span>
-          </div>
-        </li>
+          </li>
+        ))}
       </ul>
     </div>
-
   );
 }
 
