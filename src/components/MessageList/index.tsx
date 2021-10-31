@@ -14,8 +14,30 @@ const MessageList: React.FC = () => {
             An example of a message
           </p>
           <div className={styles.messageUser}>
-            <div>
-              <img src="" alt="" />
+            <div className={styles.userImage}>
+              <img src="https://github.com/ivanseibel.png" alt="Ivan Seibel" />
+            </div>
+            <span>Ivan Seibel</span>
+          </div>
+        </li>
+        <li className={styles.message}>
+          <p className={styles.messageContent}>
+            An example of a message
+          </p>
+          <div className={styles.messageUser}>
+            <div className={styles.userImage}>
+              <img src="https://github.com/ivanseibel.png" alt="Ivan Seibel" />
+            </div>
+            <span>Ivan Seibel</span>
+          </div>
+        </li>
+        <li className={styles.message}>
+          <p className={styles.messageContent}>
+            An example of a message
+          </p>
+          <div className={styles.messageUser}>
+            <div className={styles.userImage}>
+              <img src="https://github.com/ivanseibel.png" alt="Ivan Seibel" />
             </div>
             <span>Ivan Seibel</span>
           </div>
