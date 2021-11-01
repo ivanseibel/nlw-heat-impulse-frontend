@@ -42,7 +42,10 @@ function AuthProvider(props: AuthProvider) {
       const { token, user } = result.data;
 
       localStorage.setItem('@dowhile:token', token);
+
       setUser(user);
+
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
     });
   }, []);
 
