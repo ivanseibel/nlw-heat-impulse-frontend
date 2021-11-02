@@ -36,6 +36,8 @@ const MessageList: React.FC = () => {
         messagesQueue.shift();
       }
     }, 3000);
+
+    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
